@@ -12,3 +12,6 @@ def posts_list(request):
 def post_page(request, slug):
     post = Posts.objects.get(slug=slug)
     return render(request, 'posts/post_page.html', {'post': post})
+
+def post_new(request):
+    return render(request, 'posts/post_new.html')
