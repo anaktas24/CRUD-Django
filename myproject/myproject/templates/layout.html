@@ -23,18 +23,23 @@
         <a href="{% url 'posts:list' %}">
             <span role="img" aria-label="Posts" title="Posts">Posts</span>
         </a> |
-        <a href="{% url 'users:register' %}">
+
+        {% if user.is_authenticated %}
+          <a href="{% url 'posts:new_post' %}">
+            <span role="img" aria-label="New Post" title="New Post">New Post</span>
+          </a>
+          <form class="logout" action="{% 'users:logout' %}" method="post">
+            {% csrf_token %}
+            <button class="logout-button" aria-label="User logout" title="User Logout">Logout</button>
+          </form>
+        {% else %}
+          <a href="{% url 'users:register' %}">
             <span role="img" aria-label="User Registration" title="User Registration">Register</span>
-        </a>
-        <a href="{% url 'users:login' %}">
-          <span role="img" aria-label="User Login" title="User Login">Login</span>
-        </a>
-        <a href="{% url 'posts:new_post' %}">
-          <span role="img" aria-label="New Post" title="New Post">New Post</span>
-        </a>
-        <form class="logout" action="{% 'users:logout' %}" method="post">
-          {% csrf_token %}
-          <button class="logout-button" aria-label="User logout" title="User Logout">Logout</button>
+          </a>
+          <a href="{% url 'users:login' %}">
+            <span role="img" aria-label="User Login" title="User Login">Login</span>
+          </a>
+        {% endif %}
 
     </nav>
     <main>
